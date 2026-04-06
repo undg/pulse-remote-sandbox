@@ -17,7 +17,7 @@ base-start:
 
 ## base-start-headless: Start the base audio VM with headless
 .PHONY: base-start-headless
-base-start:
+base-start-headless:
 	qemu-system-x86_64 -accel kvm \
 		-m 2G \
 		-hda arch-base.qcow2 \

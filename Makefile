@@ -38,9 +38,9 @@ snapshot-start:
 		-serial stdio \
 		-nic user,hostfwd=tcp::2222-:22
 
-## snapshot-reset : Reset test VM image from base
-.PHONY: snapshot-reset
-snapshot-reset:
+## snapshot-fresh : Create or reset VM to fresh state from base
+.PHONY: snapshot-fresh
+snapshot-fresh:
 	rm -f arch-snapshot.qcow2
 	qemu-img create \
 		-f qcow2 \

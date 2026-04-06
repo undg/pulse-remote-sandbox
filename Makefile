@@ -15,6 +15,19 @@ base-start:
 		-device hda-duplex,audiodev=snd0 \
 		-nic user,hostfwd=tcp::2222-:22
 
+## base-start-headless: Start the base audio VM with headless
+.PHONY: base-start-headless
+base-start:
+	qemu-system-x86_64 -accel kvm \
+		-m 2G \
+		-hda arch-base.qcow2 \
+		-audiodev pa,id=snd0 \
+		-device intel-hda \
+		-device hda-duplex,audiodev=snd0 \
+		-display none \
+		-serial stdio \
+		-nic user,hostfwd=tcp::2222-:22
+
 ## base-freeze   : Make base VM image read-only
 .PHONY: base-freeze
 base-freeze:
@@ -36,7 +49,8 @@ snapshot-start:
 		-device hda-duplex,audiodev=snd0 \
 		-display none \
 		-serial stdio \
-		-nic user,hostfwd=tcp::2222-:22
+		-nic user,hostfwd=tcp::2222-:22 \
+		-nic user,hostfwd=tcp::8449-:8448
 
 ## snapshot-fresh : Create or reset VM to fresh state from base
 .PHONY: snapshot-fresh
